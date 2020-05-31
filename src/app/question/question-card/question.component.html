@@ -1,0 +1,12 @@
+<div class='flippable-card' (click)='isFlipped=!isFlipped' >
+  <mat-card *ngIf="question$ | async; let question">
+    <mat-card-title>Question {{question.id}} of {{numQuestions}} </mat-card-title>
+    <mat-card-subtitle>{{question.group}}</mat-card-subtitle>
+    <mat-card-content *ngIf="!isFlipped">{{question.question}}</mat-card-content>
+    <mat-card-content *ngIf="isFlipped">{{question.answer}}</mat-card-content>
+  </mat-card>
+  <div class="questionNav">
+    <fa-icon [icon]="faChevronLeft" title="previous" class="fa-3x"></fa-icon>
+    <fa-icon [icon]="faChevronRight" title="next" class="fa-3x"></fa-icon>
+  </div>
+</div>
