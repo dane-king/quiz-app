@@ -18,8 +18,6 @@ export class QuestionService {
   constructor(private http: HttpClient){}
 
   get(id: number): Observable<Question> {
-    console.log('in service');
-
     return this.http.get<Question>(`/question/${id}`);
   }
 

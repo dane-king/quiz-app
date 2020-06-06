@@ -2,8 +2,9 @@ import { Question } from './question.model';
 import { QuestionService } from '../question.service';
 import { Component, OnInit } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { tap, takeWhile } from 'rxjs/operators';
+import { tap, takeWhile, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class QuestionComponent implements OnInit {
   question$: Observable<Question>;
+  questionNum: number;
   numQuestions = 10;
   isFlipped = false;
 
@@ -20,10 +22,11 @@ export class QuestionComponent implements OnInit {
   faChevronLeft = faChevronLeft;
 
 
-  constructor(private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.question$=this.questionService.get(1);
+    this.route.params.subscribe(p => this.questionNum = p.id);
+    this.question$ = this.questionService.get(this.questionNum);
     this.isFlipped = false;
   }
 
