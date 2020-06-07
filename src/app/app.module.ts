@@ -20,7 +20,7 @@ import { QuestionComponent } from './question/question-card/question.component';
   declarations: [
     AppComponent,
     QuestionComponent,
-    StartComponent
+    StartComponent,
   ],
   imports: [
     BrowserModule,

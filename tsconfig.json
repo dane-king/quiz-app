@@ -19,7 +19,7 @@
     "allowSyntheticDefaultImports":true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/.history"],
+  "exclude": ["node_modules", "**/.history"],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

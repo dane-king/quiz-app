@@ -3,12 +3,12 @@ version: 0.2
 env:
     variables:
         CACHE_CONTROL: "86400"
-        S3_BUCKET: "https://s3.us-east-2.amazonaws.com/dane-king.com"
+        S3_BUCKET: "https://s3.us-east-2.amazonaws.com/dane-king.com/dist"
         BUILD_FOLDER: "dist"
 phases:
   install:
     runtime-versions:
-        nodejs: 10
+        nodejs: 12
     commands:
         - echo Installing source NPM dependencies...
         - npm install
