@@ -4,12 +4,11 @@ import {By} from '@angular/platform-browser';
 import { QuestionComponent } from './question.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { AppModule } from 'src/app/app.module';
 
-fdescribe('QuestionComponent', () => {
+describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
-  const questionId = 2;
+  let questionId = 2;
   const mockService = jasmine.createSpyObj(QuestionService, {get: of({id: questionId})});
 
 
@@ -18,7 +17,7 @@ fdescribe('QuestionComponent', () => {
       declarations: [ QuestionComponent ],
       providers: [
         {provide: QuestionService, useValue: mockService},
-        { provide: ActivatedRoute, useValue: {params: of({id: questionId})}},
+        { provide: ActivatedRoute, useValue: {params: of({id: 2})}},
       ]
     }).compileComponents();
   }));
@@ -28,6 +27,9 @@ fdescribe('QuestionComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+  afterEach(() => {
+    questionId = 2;
+  });
 
   it('should create Question Component', () => {
     expect(component).toBeTruthy();
@@ -35,6 +37,22 @@ fdescribe('QuestionComponent', () => {
 
   it('should pass in question id', () => {
     expect(component.question.id).toBe(questionId);
+  });
+  it('should have next question', () => {
+    expect(component.nextQuestion).toBe(questionId + 1);
+  });
+  it('should have previous question', () => {
+    expect(component.prevQuestion).toBe(questionId - 1);
+  });
+
+  it('should decrement past zero', () => {
+    questionId = 1;
+    expect(component.prevQuestion).toBe(1);
+  });
+
+  it('should increment past numQuestions', () => {
+    questionId = component.numQuestions;
+    expect(component.nextQuestion).toBe(component.numQuestions);
   });
 
   it('should change value of flipped on click', () => {
@@ -48,5 +66,6 @@ fdescribe('QuestionComponent', () => {
     expect(mockService.get).toHaveBeenCalledWith(questionId);
   });
   // TODO: how to test that click went to next question
+
 
 });

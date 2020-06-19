@@ -31,7 +31,8 @@ import { QuestionComponent } from './question/question-card/question.component';
     FontAwesomeModule
   ],
   providers: [
-    fakeBackendProvider
+    fakeBackendProvider,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

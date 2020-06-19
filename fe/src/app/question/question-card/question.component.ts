@@ -5,8 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { tap, takeWhile, map, flatMap, mergeMap, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -36,8 +35,8 @@ export class QuestionComponent implements OnInit {
       switchMap(q => this.questionService.get(q))
     ).subscribe(q => {
       this.question = q;
-      this.nextQuestion = q.id + 1;
-      this.prevQuestion = q.id - 1;
+      this.nextQuestion = q.id === this.numQuestions ? q.id : q.id + 1;
+      this.prevQuestion = q.id === 1 ? 1 : q.id - 1;
     });
   }
 
