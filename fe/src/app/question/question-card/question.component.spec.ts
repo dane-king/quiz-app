@@ -17,15 +17,17 @@ describe('QuestionComponent', () => {
       declarations: [ QuestionComponent ],
       providers: [
         {provide: QuestionService, useValue: mockService},
-        { provide: ActivatedRoute, useValue: {params: of({id: 2})}},
+        { provide: ActivatedRoute, useValue: {params: of({id: questionId})}},
       ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
+
     fixture = TestBed.createComponent(QuestionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   });
   afterEach(() => {
     questionId = 2;
@@ -38,6 +40,7 @@ describe('QuestionComponent', () => {
   it('should pass in question id', () => {
     expect(component.question.id).toBe(questionId);
   });
+
   it('should have next question', () => {
     expect(component.nextQuestion).toBe(questionId + 1);
   });
@@ -46,12 +49,12 @@ describe('QuestionComponent', () => {
   });
 
   it('should decrement past zero', () => {
-    questionId = 1;
     expect(component.prevQuestion).toBe(1);
   });
 
-  it('should increment past numQuestions', () => {
-    questionId = component.numQuestions;
+  it('should not increment past numQuestions', () => {
+    component.question.id = 2;
+    fixture.detectChanges();
     expect(component.nextQuestion).toBe(component.numQuestions);
   });
 
@@ -63,9 +66,40 @@ describe('QuestionComponent', () => {
   });
 
   it('should call Question service with question id', () => {
-    expect(mockService.get).toHaveBeenCalledWith(questionId);
+    expect(mockService.get).toHaveBeenCalledWith(2);
   });
-  // TODO: how to test that click went to next question
 
+  describe('Navigation', () => {
+    it('should show previous and last question if not first or last', () => {
+      component.question.id = 2;
+      fixture.detectChanges();
+
+      const previous =  fixture.debugElement.query(By.css('.questionNav a [title=previous]'));
+      const next =  fixture.debugElement.query(By.css('.questionNav a [title=next]'));
+
+      expect(previous).toBeTruthy();
+      expect(next).toBeTruthy();
+    });
+
+    it('should not show beginning arrow at first question', () => {
+      component.question.id = 1;
+      fixture.detectChanges();
+      const previous =  fixture.debugElement.query(By.css('.questionNav a [title=previous]'));
+
+      expect(previous).toBeNull();
+    });
+
+    it('should not show ending arrow at last question', () => {
+      component.question.id = component.numQuestions;
+      fixture.detectChanges();
+
+      const next =  fixture.debugElement.query(By.css('.questionNav  a fa-icon[title=next]'));
+
+      expect(next).toBeNull();
+
+    });
+
+
+  });
 
 });

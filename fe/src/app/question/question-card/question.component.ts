@@ -5,7 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./question.component.scss'],
 })
 export class QuestionComponent implements OnInit {
-  question: Question;
+  question = new Question();
   nextQuestion: number;
   prevQuestion: number;
   numQuestions = 3;
@@ -35,6 +35,7 @@ export class QuestionComponent implements OnInit {
       switchMap(q => this.questionService.get(q))
     ).subscribe(q => {
       this.question = q;
+      console.log(q);
       this.nextQuestion = q.id === this.numQuestions ? q.id : q.id + 1;
       this.prevQuestion = q.id === 1 ? 1 : q.id - 1;
     });
