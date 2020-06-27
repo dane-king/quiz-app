@@ -1,7 +1,13 @@
 <nav>
-  <a [routerLink] = "'/question/1'">Start Quiz</a>
+  <ul>
+    <li>
+      <a href="./index.html" alt="Home">Back Home</a>
+    </li>
+    <li>
+      <a [routerLink]="'/question/1'">Start Quiz</a>
+    </li>
+  </ul>
 </nav>
 <div class="wrapper">
   <router-outlet></router-outlet>
 </div>
-

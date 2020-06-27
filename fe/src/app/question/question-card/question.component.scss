@@ -5,13 +5,18 @@
   border: 1px solid black;
   border-radius: 8px;
 }
-.questionNav{
-  margin:2em;
+.questionNav {
+  margin: 0 10em;
   div {
     display: inline;
   }
-  fa-icon{
-    padding: 1em
+  fa-icon {
+    padding: 1em;
+  }
+  fa-icon[title="previous"] {
+    float: left;
+  }
+  fa-icon[title="next"] {
+    float: right;
   }
 }
-
