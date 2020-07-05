@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   quiz application to create and take quizes
@@ -31,12 +31,12 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  QuizQuestionsApi:
-    Description: "API Gateway endpoint URL for Prod stage for Quiz Questions function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/questions/"
   QuizQuestionsFunction:
     Description: "Quiz Questions Lambda Function ARN"
     Value: !GetAtt QuizQuestionsFunction.Arn
   QuizQuestionsFunctionIamRole:
     Description: "Implicit IAM Role created for Quiz Questions function"
     Value: !GetAtt QuizQuestionsFunctionRole.Arn
+  QuizQuestionsApi:
+    Description: "API Gateway endpoint URL for Prod stage for Quiz Questions function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/questions"

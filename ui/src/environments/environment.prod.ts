@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  baseUrl:
+    "https://enuwmyp6pl.execute-api.us-east-2.amazonaws.com/Prod/questions",
+  production: true,
 };
