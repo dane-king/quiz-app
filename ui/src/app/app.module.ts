@@ -12,6 +12,7 @@ import { StartComponent } from './start/start.component';
 import { fakeBackendProvider } from './http.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionComponent } from './question/question-card/question.component';
+import { QuestionListComponent } from './question/question-list/question-list.component';
 
 
 
@@ -21,6 +22,7 @@ import { QuestionComponent } from './question/question-card/question.component';
     AppComponent,
     QuestionComponent,
     StartComponent,
+    QuestionListComponent,
   ],
   imports: [
     BrowserModule,

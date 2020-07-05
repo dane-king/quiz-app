@@ -5,13 +5,14 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS,
-} from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+} from "@angular/common/http";
+import { Observable, of, throwError } from "rxjs";
+import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 
-import data from './mock/questions.json';
-import { Question } from './question/question-card/question.model';
-import { Injectable } from '@angular/core';
+import data from "./mock/questions.json";
+import { Question } from "./question/question-card/question.model";
+import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -20,22 +21,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const { url, method, headers, body } = request;
-
+    const isMockBackEnd = environment.mockBackend;
     // tslint:disable-next-line: max-line-length
     // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
     // wrap in delayed observable to simulate server api call
-    return of(null)
-      .pipe(mergeMap(handleRoute))
-      .pipe(materialize())
-      .pipe(delay(500))
-      .pipe(dematerialize());
+    const handleRequest$ = of(null).pipe(mergeMap(handleRoute));
+    return isMockBackEnd
+      ? handleRequest$.pipe(materialize(), delay(500), dematerialize())
+      : handleRequest$;
 
     function handleRoute() {
       switch (true) {
-        case url.endsWith('/question') && method === 'GET':
+        case url.startsWith(environment.baseUrl):
+          return next.handle(request);
+        case url.endsWith("/questions") && method === "GET":
           return startQuiz();
-        case url.match(/\/question\/\d+$/) && method === 'GET':
-          return getQuestionById();
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -45,19 +45,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function startQuiz() {
-      return ok(data[0]);
+      return ok(data);
     }
 
-    function getQuestionById() {
-      const question = data.find((x) => x.id === idFromUrl());
-      console.log(question);
 
-      return ok(question);
-    }
 
     // helper functions
 
-    function ok(reqBody?: Question) {
+    function ok(reqBody?: Question[]) {
       return of(
         new HttpResponse({
           body: reqBody,
@@ -72,7 +67,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function idFromUrl() {
-      const urlParts = url.split('/');
+      const urlParts = url.split("/");
       return parseInt(urlParts[urlParts.length - 1], 10);
     }
   }

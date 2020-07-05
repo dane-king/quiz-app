@@ -1,6 +1,5 @@
 export class Question {
-  id = 1;
+  id?: number;
   question: string;
   answer: string;
-  group: string;
 }

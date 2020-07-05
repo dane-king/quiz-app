@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "quiz"
+s3_bucket = "dane.king.sam-cli-bucket"
+s3_prefix = "quiz"
+region = "us-east-2"
+capabilities = "CAPABILITY_IAM"
+

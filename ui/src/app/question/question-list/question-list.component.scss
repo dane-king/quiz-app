@@ -1,17 +1,17 @@
 :host {
   display: inline-block;
-  padding: 32px;
-  width: 50vw;
   border: 1px solid black;
   border-radius: 8px;
 }
+
+
 .questionNav {
-  margin: 0 10em;
+  margin: 0 4em;
   div {
     display: inline;
   }
   fa-icon {
-    padding: 1em;
+    padding: 0.25em;
   }
   fa-icon[title="previous"] {
     float: left;
