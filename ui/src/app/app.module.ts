@@ -8,10 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 
 
-import { StartComponent } from './start/start.component';
-import { fakeBackendProvider } from './http.interceptor';
+import {MatTableModule } from "@angular/material/table";
+
+import { HttpBackendProvider } from './http.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionComponent } from './question/question-card/question.component';
+import { QuestionNavComponent } from './question/question-nav/question-nav.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
 
 
@@ -21,19 +23,20 @@ import { QuestionListComponent } from './question/question-list/question-list.co
   declarations: [
     AppComponent,
     QuestionComponent,
-    StartComponent,
     QuestionListComponent,
+    QuestionNavComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatTableModule,
     HttpClientModule,
     FontAwesomeModule
   ],
   providers: [
-    fakeBackendProvider,
+    HttpBackendProvider,
     HttpClientModule
   ],
   bootstrap: [AppComponent]

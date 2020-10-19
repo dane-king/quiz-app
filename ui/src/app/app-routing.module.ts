@@ -1,15 +1,16 @@
+import { QuestionNavComponent } from './question/question-nav/question-nav.component';
 import { QuestionListComponent } from './question/question-list/question-list.component';
-import { StartComponent } from './start/start.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'start',
-    component: StartComponent,
+    path: 'edit',
+    component: QuestionListComponent,
   },
   { path: 'questions',
-  component: QuestionListComponent },
+  component: QuestionNavComponent },
 ];
 
 @NgModule({

@@ -1,22 +1,10 @@
-:host {
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 8px;
+ul{
+    list-style: none;
+}
+ul li span{
+    margin: 1em;
 }
 
-
-.questionNav {
-  margin: 0 4em;
-  div {
-    display: inline;
-  }
-  fa-icon {
-    padding: 0.25em;
-  }
-  fa-icon[title="previous"] {
-    float: left;
-  }
-  fa-icon[title="next"] {
-    float: right;
-  }
+ul li{
+    display: block;
 }

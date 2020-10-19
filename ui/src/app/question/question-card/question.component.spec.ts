@@ -34,5 +34,9 @@ describe('QuestionComponent', () => {
     expect(component.isFlipped).toBeTrue();
   });
 
+  it('should be able to click', () => {
+    
+  });
+
 
 });

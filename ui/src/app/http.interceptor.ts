@@ -5,9 +5,10 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS,
+  HttpErrorResponse,
 } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
-import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
+import { delay, mergeMap, materialize, dematerialize, catchError } from "rxjs/operators";
 
 import data from "./mock/questions.json";
 import { Question } from "./question/question-card/question.model";
@@ -15,7 +16,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 
 @Injectable()
-export class FakeBackendInterceptor implements HttpInterceptor {
+export class HttpBackendInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -32,13 +33,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function handleRoute() {
       switch (true) {
-        case url.startsWith(environment.baseUrl):
+        case url.startsWith(environment.baseUrl) && !isMockBackEnd:
           return next.handle(request);
         case url.endsWith("/questions") && method === "GET":
           return startQuiz();
         default:
           // pass through any requests not handled above
-          return next.handle(request);
+          return next.handle(request).pipe(catchError(handleError))
       }
     }
 
@@ -62,10 +63,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       );
     }
 
-    function error(message) {
-      return throwError({ error: { message } });
+    function handleError(error: HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong.
+        console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error}`);
+      }
+      return throwError(
+        'Something bad happened; please try again later.');
     }
-
+  
     function idFromUrl() {
       const urlParts = url.split("/");
       return parseInt(urlParts[urlParts.length - 1], 10);
@@ -73,9 +85,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 }
 
-export const fakeBackendProvider = {
+export const HttpBackendProvider = {
   // use fake backend in place of Http service for backend-less development
   provide: HTTP_INTERCEPTORS,
-  useClass: FakeBackendInterceptor,
+  useClass: HttpBackendInterceptor,
   multi: true,
 };

@@ -1,111 +1,47 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { QuestionListComponent } from "./question-list.component";
-import { QuestionService } from "./../question.service";
-import { By } from "@angular/platform-browser";
-import { ActivatedRoute } from "@angular/router";
-import { of } from "rxjs";
-import { nextTick } from "process";
+import { Output } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { QuestionService } from '../question.service';
 
-describe("QuestionListComponent", () => {
+import { QuestionListComponent } from './question-list.component';
+
+describe('QuestionListComponent', () => {
   let component: QuestionListComponent;
   let fixture: ComponentFixture<QuestionListComponent>;
+  let ul:HTMLUListElement;
   const questionsFromService = [
-    { question: "One", answer: "AnswerOne" },
-    { question: "Two", answer: "AnswerTwo" },
-    { question: "Three", answer: "AnswerThree" },
+    { id:1, question: "One", answer: "AnswerOne", category:["test"] },
+    { id:2, question: "Two", answer: "AnswerTwo" },
+    { id:3, question: "Three", answer: "AnswerThree", category:["test"] },
+    { id:4, question: "Four", answer: "AnswerFour", category:["test", "test1"] },
   ];
   const mockService = jasmine.createSpyObj(QuestionService, {
     getAll: of(questionsFromService),
   });
 
-  beforeEach(async () => {
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [QuestionListComponent],
+      declarations: [ QuestionListComponent ],
       providers: [{ provide: QuestionService, useValue: mockService }],
     }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(QuestionListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    ul = fixture.nativeElement.querySelector('ul');
   });
-  describe("Creating Component", () => {
-    it("should create a list component", () => {
-      expect(component).toBeTruthy();
-    });
-    it("should call Question service with question id", () => {
-      expect(mockService.getAll).toHaveBeenCalled();
-    });
-    it("should have num questions equal to number of questions returned", () => {
-      expect(component.numQuestions).toBe(component.questions.length);
-    });
 
-    it("should have question id of 1 when created", () => {
-      expect(component.currentQuestion.id).toBe(1);
-    });
-
-    it("should have next question", () => {
-      expect(component.nextQuestion).toBe(2);
-    });
-    it("should have previous question", () => {
-      expect(component.prevQuestion).toBe(1);
-    });
-    it("should have current question", () => {
-      expect(component.currentQuestion).toEqual({
-        question: "One",
-        answer: "AnswerOne",
-        id: 1,
-      });
-    });
+  it('should have a display questions from the service', () => {
+    const outputText=ul.textContent;
+    expect(outputText).toContain("1OneAnswerOnetest");
+    expect(outputText).toContain("4FourAnswerFourtest,test1");
   });
-  describe("Navigation", () => {
-    it("should decrement past zero", () => {
-      component.previous();
-      fixture.detectChanges();
-      expect(component.prevQuestion).toBe(1);
-    });
-
-    xit("should not increment past numQuestions", () => {
-      component.currentQuestion.id = component.numQuestions;
-      component.next();
-      fixture.detectChanges();
-      expect(component.nextQuestion).toBe(component.numQuestions);
-    });
-
-    it("should show previous and last question if not first or last", () => {
-      component.next();
-      fixture.detectChanges();
-
-      const previous = fixture.debugElement.query(
-        By.css(".questionNav a [title=previous]")
-      );
-      const next = fixture.debugElement.query(
-        By.css(".questionNav a [title=next]")
-      );
-
-      expect(previous).toBeTruthy();
-      expect(next).toBeTruthy();
-    });
-
-    it("should not show beginning arrow at first question", () => {
-      component.currentQuestion.id = 1;
-      fixture.detectChanges();
-      const previous = fixture.debugElement.query(
-        By.css(".questionNav a [title=previous]")
-      );
-
-      expect(previous).toBeNull();
-    });
-
-    xit("should not show ending arrow at last question", () => {
-      component.numQuestions = 1;
-      component.currentQuestion.id = 1;
-      fixture.detectChanges();
-
-      const next = fixture.debugElement.query(
-        By.css(".questionNav  a fa-icon[title=next]")
-      );
-
-      expect(next).toBeNull();
-    });
+  it('should be able to be edited', () => {
+    
+    
   });
+
 });
