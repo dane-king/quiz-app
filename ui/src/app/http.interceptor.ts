@@ -11,7 +11,7 @@ import { Observable, of, throwError } from "rxjs";
 import { delay, mergeMap, materialize, dematerialize, catchError } from "rxjs/operators";
 
 import data from "./mock/questions.json";
-import { Question } from "./question/question-card/question.model";
+import { Question } from "./questions/question-card/question.model";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 
