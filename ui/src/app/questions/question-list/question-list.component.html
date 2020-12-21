@@ -1,0 +1,16 @@
+<!-- <mat-table [dataSource]="questions" >
+    <ng-container matColumnDef="seqNo">
+        <div *matHeaderCellDef>#</div>
+        <div *matCellDef="let lesson">{{question.id}}</div>
+    </ng-container>
+
+</mat-table> -->
+<ul>
+        <li class="row" *ngFor ="let question of questions">
+        <span>{{question.id}}</span>
+        <span>{{question.question}}</span>
+        <span>{{question.answer}}</span>
+        <span>{{question.category}}</span>
+
+    </li>
+</ul>

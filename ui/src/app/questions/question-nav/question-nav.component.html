@@ -1,0 +1,13 @@
+<div class="questionNav" fxLayout="column" fxLayoutGap="32px">
+  <div>
+    <app-question [question]="currentQuestion" [numQuestions]="numQuestions"></app-question>
+  </div>
+  <a *ngIf="currentQuestion?.id!=prevQuestion" (click)="previous()">
+    <fa-icon [icon]="faChevronLeft" title="previous" class="fa-3x"></fa-icon>
+  </a>
+
+  <a *ngIf="currentQuestion?.id!=nextQuestion" (click)="next()">
+    <fa-icon [icon]="faChevronRight" title="next" class="fa-3x"></fa-icon>
+  </a>
+</div>
+
