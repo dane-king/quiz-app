@@ -6,6 +6,7 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: "root",
 })
+//TODO:make sure hint works
 export class QuestionService {
   baseUrl = `${environment.baseUrl}/questions`;
   constructor(private http: HttpClient) {

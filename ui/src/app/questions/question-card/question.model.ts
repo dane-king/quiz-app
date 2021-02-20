@@ -3,4 +3,5 @@ export class Question {
   question: string;
   answer: string;
   category?:string[];
+  hint?: string;
 }

@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
+
+//TODO: Filter by tags
+//TODO: Quiz creator number and tags
 export class TagsComponent implements OnInit {
 
   constructor() { }

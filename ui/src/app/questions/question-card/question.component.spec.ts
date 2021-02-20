@@ -1,41 +1,62 @@
-import { QuestionService } from './../question.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { QuestionComponent } from './question.component';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 import { Question } from './question.model';
 
 describe('QuestionComponent', () => {
   let component: QuestionComponent;
   let fixture: ComponentFixture<QuestionComponent>;
 
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [QuestionComponent]
+    })
+  }));
+
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionComponent);
     component = fixture.componentInstance;
-    component.question = new Question();
-    component.question.id = 1;
+
+    component = fixture.componentInstance;
     component.numQuestions = 3;
-    component.question = new Question();
+    
+    const question = new Question();
+    question.id = 1;
+    question.answer="Answer";
+    question.question="Question"
+    question.hint = "this is a hint";
+    component.question = question;
 
     fixture.detectChanges();
+  })
 
-  });
-
-  it('should create Question Component', () => {
-    expect(component).toBeTruthy();
+  it('should show question on load', () => {
+    const cardDiv = fixture.debugElement.query(By.css('div.flippable-card'));
+    const el = fixture.debugElement.query(By.css("mat-card-content.question")).nativeElement;
+    expect(el.textContent).toContain("Question");
   });
 
 
   it('should change value of flipped on click', () => {
-    const cardDiv =  fixture.debugElement.query(By.css('div.flippable-card'));
+    const cardDiv = fixture.debugElement.query(By.css('div.flippable-card'));
     component.isFlipped = false;
     cardDiv.triggerEventHandler('click', {});
+    fixture.debugElement.query(By.css("fa-icon[title ='hint']")).nativeElement;
     expect(component.isFlipped).toBeTrue();
   });
 
-  it('should be able to click', () => {
-    
+  it('should be able to hide hint if none available', () => {
+    component.question.hint = undefined;
+    fixture.detectChanges();
+    const hintIcon = fixture.debugElement.query(By.css("fa-icon[title ='hint']"));
+    expect(hintIcon).toBeNull();
+
+  });
+
+  it('should be able to click on hint', () => {
+    const hintIcon = fixture.debugElement.query(By.css("fa-icon[title ='hint']")).nativeElement;
+    expect(hintIcon).toBeDefined();
+
   });
 
 
