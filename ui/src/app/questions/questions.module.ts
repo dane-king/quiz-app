@@ -21,7 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule,
   ],
   exports:[
-    
+    QuestionsModule
   ]
 })
 export class QuestionsModule { }

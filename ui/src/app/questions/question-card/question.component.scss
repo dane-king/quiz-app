@@ -1,14 +1,6 @@
 .flippable-card {
   padding-top: 1em;
 }
-.mat-card{
-  min-width: 40vw;
-  padding:0;
-}
-
-.mat-card-title {
-  margin-bottom: 1em;
-}
 
 .mat-card-actions{
   min-height: 5vh;
@@ -18,5 +10,11 @@
 }
 .flexSpacer{
   flex: 1 1 auto;
+}
+
+.mat-card{
+  min-width: 40vw;
+  padding:0;
+  margin-top:2em;
 }
 

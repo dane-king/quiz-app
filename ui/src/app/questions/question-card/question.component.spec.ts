@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Question } from 'src/app/models/questions';
 import { QuestionComponent } from './question.component';
-import { Question } from './question.model';
 
 describe('QuestionComponent', () => {
   let component: QuestionComponent;
@@ -18,13 +18,13 @@ describe('QuestionComponent', () => {
     component = fixture.componentInstance;
 
     component = fixture.componentInstance;
-    component.numQuestions = 3;
-    
-    const question = new Question();
-    question.id = 1;
-    question.answer="Answer";
-    question.question="Question"
-    question.hint = "this is a hint";
+
+    const question: Question = {
+      id: 1,
+      answer: "Answer",
+      question: "Question",
+      hint: "this is a hint"
+    };
     component.question = question;
 
     fixture.detectChanges();

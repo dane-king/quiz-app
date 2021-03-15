@@ -1,10 +1,10 @@
-import { Question } from './question.model';
 import { Component, Input, SimpleChanges, OnChanges } from '@angular/core';
 import {
   faChevronLeft,
   faChevronRight,
   faLightbulb
 } from '@fortawesome/free-solid-svg-icons';
+import { Question } from 'src/app/models/questions';
 
 @Component({
   selector: 'app-question',
@@ -15,7 +15,6 @@ import {
 //TODO: Show hint text
 export class QuestionComponent implements OnChanges {
   @Input() question: Question;
-  @Input() numQuestions: number;
 
   isFlipped = false;
   showHint = false;
@@ -32,7 +31,7 @@ export class QuestionComponent implements OnChanges {
   displayHint() {
     this.showHint=true;
   }
-  
+
   reset(){
     this.isFlipped = false;
   }

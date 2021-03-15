@@ -4,7 +4,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { Question } from '../question-card/question.model';
+import { Question } from 'src/app/models/questions';
 
 
 @Component({
@@ -13,11 +13,9 @@ import { Question } from '../question-card/question.model';
   styleUrls: ['./question-nav.component.scss']
 })
 export class QuestionNavComponent implements OnInit {
-  currentQuestion: Question;
+  currentQuestion: number;
   questions: Question[];
   numQuestions: number;
-  prevQuestion: number;
-  nextQuestion: number;
 
   faChevronRight = faChevronRight;
   faChevronLeft = faChevronLeft;
@@ -28,27 +26,20 @@ export class QuestionNavComponent implements OnInit {
     this.questionService.getAll().subscribe(questions => {
       this.questions = questions;
       this.numQuestions = questions.length;
-      this.setCurrentQuestion(1);
+      this.currentQuestion = 1;
     });
   }
-  previous(){
-    const prevValue = this.currentQuestion.id - 1;
-    this.setCurrentQuestion(prevValue < 1 ? 1 : prevValue);
-    this.setPrevNext();
+  previous() {
+    if (this.currentQuestion > 1) {
+      this.currentQuestion -= 1;
+    }
   }
-  next(){
-    const prevValue = this.currentQuestion.id + 1;
-    this.setCurrentQuestion(prevValue < 1 ? 1 : prevValue);
+  next() {
+    if (this.currentQuestion < this.numQuestions) {
+      this.currentQuestion += 1;
+    }
   }
-  private setCurrentQuestion(currentQuestionNum: number){
-    this.currentQuestion = this.questions[currentQuestionNum - 1];
-    this.currentQuestion.id = currentQuestionNum;
-    this.setPrevNext();
-
+  getCurrentQuestion() {
+    return this.questions[this.currentQuestion - 1];
   }
-  private setPrevNext(){
-    this.nextQuestion = this.currentQuestion.id === this.numQuestions ? this.currentQuestion.id : this.currentQuestion.id + 1;
-    this.prevQuestion = this.currentQuestion.id === 1 ? 1 : this.currentQuestion.id - 1;
-  }
-
 }

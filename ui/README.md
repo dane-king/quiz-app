@@ -30,6 +30,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 - Make button to flip card
 - Rename to flash card
 - Page to create flash card deck by number and tags
+- Look at flex layout or maybe grid alternative https://github.com/angular/flex-layout
   
 
 

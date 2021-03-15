@@ -1,7 +1,7 @@
 import { environment } from "./../../environments/environment";
-import { Question } from "./question-card/question.model";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Question } from "../models/questions";
 
 @Injectable({
   providedIn: "root",
@@ -12,12 +12,15 @@ export class QuestionService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(group?: string) {
+  getAll(group?: string, limit?:number) {
     let url = this.baseUrl
       ;
     if (group) {
       url += `/${group}`;
     };
+    if(limit){
+      url += `/?num_items=${limit}`
+    }
 
     return this.http.get<Question[]>(url);
   }

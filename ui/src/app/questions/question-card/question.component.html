@@ -1,12 +1,20 @@
-<div class='flippable-card' (click)='flipCard()'>
+<div class="flippable-card" (click)="flipCard()">
   <mat-card>
-    <mat-card-title>Question {{question?.id}} of {{numQuestions}} </mat-card-title>
-    <mat-card-content class="question" *ngIf="!isFlipped">{{question?.question}}</mat-card-content>
-    <mat-card-content class="answer" *ngIf="isFlipped">{{question?.answer}}</mat-card-content>
+    <mat-card-content class="question" *ngIf="!isFlipped">{{
+      question?.question
+    }}</mat-card-content>
+    <mat-card-content class="answer" *ngIf="isFlipped">{{
+      question?.answer
+    }}</mat-card-content>
     <mat-card-actions align="end" fxLayout>
-      <fa-icon  [icon]="faLightbulb"  class="fa-1x" ></fa-icon>
       <div class="flexSpacer" fxFlex></div>
-      <fa-icon *ngIf="question?.hint" [icon]="faLightbulb" title="hint" class="fa-1x" (click)="displayHint()"></fa-icon>
+      <fa-icon
+        *ngIf="question?.hint"
+        [icon]="faLightbulb"
+        title="hint"
+        class="fa-1x"
+        (click)="displayHint()"
+      ></fa-icon>
     </mat-card-actions>
   </mat-card>
 </div>
