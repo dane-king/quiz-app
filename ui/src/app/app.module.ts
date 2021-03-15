@@ -21,7 +21,6 @@ import { TagsComponent } from './tags/tags.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    QuestionsModule,
   ],
   providers: [
     HttpBackendProvider,

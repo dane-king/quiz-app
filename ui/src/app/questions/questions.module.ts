@@ -20,9 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatTableModule,
     FontAwesomeModule,
   ],
-  exports:[
-    QuestionsModule
-  ]
+  exports:[]
 })
 export class QuestionsModule { }
 

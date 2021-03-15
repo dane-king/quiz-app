@@ -40,6 +40,6 @@ export class QuestionNavComponent implements OnInit {
     }
   }
   getCurrentQuestion() {
-    return this.questions[this.currentQuestion - 1];
+    return this.questions?this.questions[this.currentQuestion - 1]:1;
   }
 }

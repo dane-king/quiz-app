@@ -6,8 +6,7 @@
     <li>
       <a [routerLink]="'/questions'">Start Quiz</a>
     </li>
-    <!-- Feature flag here -->
-    <li>
+    <li *ngIf="feature.edit">
       <a [routerLink]="'/edit'">Edit</a>
     </li>
   </ul>
