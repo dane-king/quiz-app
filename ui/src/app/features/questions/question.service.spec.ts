@@ -3,8 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { QuestionService } from './question.service';
 import { environment } from 'src/environments/environment';
-import * as mockQuestions from "../mock/questions.json";
-import { Question } from '../models/questions';
+import * as mockQuestions from "../../../../e2e/mock/questions.json";
+import { Question } from '../../core/models/questions';
 
 export const baseUrl = `${environment.baseUrl}/questions`;
 

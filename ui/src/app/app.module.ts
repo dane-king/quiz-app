@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { HttpBackendProvider } from './http.interceptor';
-import { QuestionsModule } from './questions/questions.module';
+import { HttpBackendProvider } from './core/http-interceptors/http.interceptor';
+import { QuestionsModule } from './features/questions/questions.module';
 import { TagsComponent } from './tags/tags.component';
 
 

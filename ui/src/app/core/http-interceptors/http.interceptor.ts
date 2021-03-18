@@ -10,10 +10,10 @@ import {
 import { Observable, of, throwError } from "rxjs";
 import { delay, mergeMap, materialize, dematerialize, catchError } from "rxjs/operators";
 
-import data from "./mock/questions.json";
+import data from "../../../../e2e/mock/questions.json";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Question } from "./models/questions";
+import { Question } from "../models/questions";
 
 @Injectable()
 export class HttpBackendInterceptor implements HttpInterceptor {

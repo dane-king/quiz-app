@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Question } from 'src/app/models/questions';
+import { Question } from 'src/app/core/models/questions';
 import { QuestionComponent } from './question.component';
 
 describe('QuestionComponent', () => {

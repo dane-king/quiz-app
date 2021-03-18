@@ -1,5 +1,5 @@
-import { QuestionNavComponent } from './questions/question-nav/question-nav.component';
-import { QuestionListComponent } from './questions/question-list/question-list.component';
+import { QuestionNavComponent } from './features/questions/question-nav/question-nav.component';
+import { QuestionListComponent } from './features/questions/question-list/question-list.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

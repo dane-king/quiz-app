@@ -1,7 +1,7 @@
-import { environment } from "./../../environments/environment";
+import { environment } from "../../../environments/environment";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Question } from "../models/questions";
+import { Question } from "../../core/models/questions";
 
 @Injectable({
   providedIn: "root",

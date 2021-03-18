@@ -4,7 +4,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
-import { Question } from 'src/app/models/questions';
+import { Question } from 'src/app/core/models/questions';
 
 
 @Component({
